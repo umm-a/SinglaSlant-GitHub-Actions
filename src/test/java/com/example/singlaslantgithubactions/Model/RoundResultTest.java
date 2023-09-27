@@ -1,32 +1,48 @@
 package com.example.singlaslantgithubactions.Model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoundResultTest {
 
-    @Test
-    void getUserChoice() {
+    RoundResult roundResult;
+    @BeforeEach
+    void setUp(){
+        roundResult = new RoundResult("heads", "tails","Computer");
     }
 
     @Test
-    void setUserChoice() {
+    void testGetUserChoice() {
+        assertEquals("heads", roundResult.getUserChoice());
     }
 
     @Test
-    void getComputerChoice() {
+    void testSetUserChoice() {
+        roundResult.setUserChoice("tails");
+        assertEquals("tails", roundResult.getUserChoice());
     }
 
     @Test
-    void setComputerChoice() {
+    void testGetComputerChoice() {
+        assertEquals("tails", roundResult.getComputerChoice());
     }
 
     @Test
-    void getWinner() {
+    void testSetComputerChoice() {
+        roundResult.setComputerChoice("heads");
+        assertEquals("heads", roundResult.getUserChoice());
     }
 
     @Test
-    void setWinner() {
+    void testGetWinner() {
+        assertEquals("Computer", roundResult.getWinner());
+    }
+
+    @Test
+    void testSetWinner() {
+        roundResult.setWinner("User");
+        assertEquals("User", roundResult.getWinner());
     }
 }
