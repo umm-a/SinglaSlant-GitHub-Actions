@@ -41,7 +41,13 @@ public class CoinFlipController {
         model.addAttribute("rounds", rounds);
         model.addAttribute("WINNER", roundResult.getWinner() + " WINS!!!!!");
 
-        return "redirect:/";
+        model.addAttribute("userScore", coinFlip.getUserScore());
+        model.addAttribute("computerScore", coinFlip.getComputerScore());
+        model.addAttribute("turns", coinFlip.getTurns());
+        model.addAttribute("winRate", calculateWinRate());
+
+        //return "redirect:/";
+        return "index";
     }
 
     protected RoundResult playGame(String choice) {
