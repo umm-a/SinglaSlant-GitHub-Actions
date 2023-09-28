@@ -1,5 +1,8 @@
 package com.example.singlaslantgithubactions.Controllers;
 
+import com.example.singlaslantgithubactions.Model.CoinFlip;
+import com.example.singlaslantgithubactions.Services.Game;
+import com.example.singlaslantgithubactions.Services.WinRateCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -28,7 +31,7 @@ class CoinFlipControllerTest {
 
     @BeforeEach
     void setUp() {
-        coinFlipController = new CoinFlipController();
+        coinFlipController = new CoinFlipController(new Game(new CoinFlip()),new WinRateCalculator());
 
     }
 
@@ -39,17 +42,7 @@ class CoinFlipControllerTest {
                 .andExpect(content().string(containsString("Coin Flip Game")));
     }
 
-    @Test
-    void flipCoinShouldReturnHeads() {
-        String result = coinFlipController.flipCoin(0.6);
-        assertEquals(result, "heads");
-    }
 
-    @Test
-    void flipCoinShouldReturnTails() {
-        String result = coinFlipController.flipCoin(0.3);
-        assertEquals(result, "tails");
-    }
 
 
 /*
@@ -74,75 +67,7 @@ class CoinFlipControllerTest {
  */
 
 
-    @Test
-    void calculateWinRateStartsAt0() {
-        coinFlipController.coinFlip.setTurns(0);
-        assertEquals(coinFlipController.calculateWinRate(), 0);
-    }
 
-    @Test
-    void whenUserHasWonAllWinRateIs100() {
-        coinFlipController.coinFlip.setTurns(1);
-        coinFlipController.coinFlip.setUserScore(1);
-        coinFlipController.coinFlip.setComputerScore(0);
 
-        //assertTrue(coinFlipController.calculateWinRate()<0);
-        assertEquals(coinFlipController.calculateWinRate(), 100);
-    }
 
-    @Test
-    void whenUserHasLostAllWinRateIsZero() {
-        coinFlipController.coinFlip.setTurns(1);
-        coinFlipController.coinFlip.setUserScore(0);
-        //coinFlipController.coinFlip.setComputerScore(1);
-
-        //assertTrue(coinFlipController.calculateWinRate()<0);
-        assertEquals(coinFlipController.calculateWinRate(), 0);
-    }
-
-    @Test
-    void whenUserHasWonHalfWinRateIs50() {
-        coinFlipController.coinFlip.setTurns(2);
-        coinFlipController.coinFlip.setUserScore(1);
-        //coinFlipController.coinFlip.setComputerScore(1);
-
-        //assertTrue(coinFlipController.calculateWinRate()<0);
-        assertEquals(coinFlipController.calculateWinRate(), 50);
-    }
-
-    @Test
-    void choosingHeadMeansComputerGetsTails() {
-        String computerChoice = coinFlipController.calculateComputerChoice("heads");
-        assertEquals(computerChoice, "tails");
-    }
-
-    @Test
-    void choosingTailsMeansComputerGetsHeads() {
-        String computerChoice = coinFlipController.calculateComputerChoice("tails");
-        assertEquals(computerChoice, "heads");
-    }
-
-    @Test
-    void whenChoiceAndResultIsHeadsUserWins() {
-        String winner = coinFlipController.calculateWinner("heads", "heads");
-        assertEquals(winner, "User");
-    }
-
-    @Test
-    void whenChoiceAndResultIsTailsUserWins() {
-        String winner = coinFlipController.calculateWinner("tails", "tails");
-        assertEquals(winner, "User");
-    }
-
-    @Test
-    void whenChoiceEqualsHeadsAndResultEqualsTailsComputerWins() {
-        String winner = coinFlipController.calculateWinner("heads", "tails");
-        assertEquals(winner, "Computer");
-    }
-
-    @Test
-    void whenChoiceEqualsTailsAndResultEqualsHeadsComputerWins() {
-        String winner = coinFlipController.calculateWinner("tails", "heads");
-        assertEquals(winner, "Computer");
-    }
 }

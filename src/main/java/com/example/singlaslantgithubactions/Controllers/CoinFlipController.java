@@ -2,6 +2,9 @@ package com.example.singlaslantgithubactions.Controllers;
 
 import com.example.singlaslantgithubactions.Model.CoinFlip;
 import com.example.singlaslantgithubactions.Model.RoundResult;
+import com.example.singlaslantgithubactions.Services.Game;
+import com.example.singlaslantgithubactions.Services.WinRateCalculator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,22 +18,48 @@ import java.util.List;
 public class CoinFlipController {
 
     private List<RoundResult> rounds = new ArrayList<>();
-    protected CoinFlip coinFlip = new CoinFlip();
+   // protected CoinFlip coinFlip = new CoinFlip();
+    private final Game game;
+    private final WinRateCalculator winRateCalculator;
 
+
+    @Autowired
+    public CoinFlipController(Game game, WinRateCalculator winRateCalculator) {
+        this.game = game;
+        this.winRateCalculator = winRateCalculator;
+    }
 
     @GetMapping("/")
     public String index(Model model) {
+        CoinFlip coinFlip = game.getCoinFlip();
+        double winRate = winRateCalculator.calculateWinRate(coinFlip);
+
         model.addAttribute("userScore", coinFlip.getUserScore());
         model.addAttribute("computerScore", coinFlip.getComputerScore());
         model.addAttribute("turns", coinFlip.getTurns());
-        model.addAttribute("winRate", calculateWinRate());
+        model.addAttribute("winRate", winRate);
         return "index";
     }
 
-    protected double calculateWinRate() {
-        if (coinFlip.getTurns() == 0) return 0.0;
-        return ((double) coinFlip.getUserScore() / coinFlip.getTurns()) * 100;
+    @PostMapping("/flip")
+    public String publishFlip(@RequestParam String choice, Model model) {
+        double resultAsDouble = Math.random();
+        RoundResult roundResult = game.playGame(choice, resultAsDouble);
+        double winRate = winRateCalculator.calculateWinRate(game.getCoinFlip());
+        rounds.add(roundResult);
+
+        model.addAttribute("rounds", rounds);
+        model.addAttribute("WINNER", roundResult.getWinner() + " WINS!!!!!");
+
+        model.addAttribute("userScore", game.getCoinFlip().getUserScore());
+        model.addAttribute("computerScore", game.getCoinFlip().getComputerScore());
+        model.addAttribute("turns", game.getCoinFlip().getTurns());
+        model.addAttribute("winRate", winRate);
+
+        //return "redirect:/";
+        return "index";
     }
+/*
 
     @PostMapping("/flip")
     public String publishFlip(@RequestParam String choice, Model model) {
@@ -48,6 +77,11 @@ public class CoinFlipController {
 
         //return "redirect:/";
         return "index";
+    }
+
+protected double calculateWinRate() {
+        if (coinFlip.getTurns() == 0) return 0.0;
+        return ((double) coinFlip.getUserScore() / coinFlip.getTurns()) * 100;
     }
 
     protected RoundResult playGame(String choice) {
@@ -81,4 +115,6 @@ public class CoinFlipController {
         return randomNumber > 0.5 ? "heads" : "tails";
     }
 
+
+ */
 }

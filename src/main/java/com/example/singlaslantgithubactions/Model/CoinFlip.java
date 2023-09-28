@@ -1,5 +1,8 @@
 package com.example.singlaslantgithubactions.Model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CoinFlip {
     private int userScore = 0;
     private int computerScore = 0; //needed? is calculated as turns - userScore
