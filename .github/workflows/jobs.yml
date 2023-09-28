@@ -36,7 +36,7 @@ jobs:
     - name: Build and push Docker image
       working-directory: SinglaSlant-GitHub-Actions
       run: |
-        docker build -t singlaslant-github-actions .
+        docker build . --file Dockerfile --tag singlaslant-github-actions:$(date +%s)
         docker push ghcr.io/umm-a/singlaslant-github-actions:Development
 
   fake-deployment: 
