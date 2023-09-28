@@ -62,7 +62,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: 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
       - name: Build image
         run: docker build -t ghcr.io/umm-a/singlaslant-github-actions:Development -f Dockerfile .
       - name: Push image
