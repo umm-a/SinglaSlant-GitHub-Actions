@@ -18,9 +18,9 @@ task<Test>("integrationTest") {
     group = "verification"
     testClassesDirs = sourceSets.test.get().output.classesDirs
     classpath = sourceSets.test.get().runtimeClasspath
-
-    include("*IntegrationTest")
-    shouldRunAfter("test")
+    filter {
+        includeTestsMatching("*integrationTest")
+    }
 }
 tasks.jacocoTestReport {
 dependsOn(tasks.test) // tests are required to run before generating the report
