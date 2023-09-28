@@ -7,6 +7,20 @@ plugins {
 
 tasks.test {
 finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+
+        filter {
+            excludeTestsMatching("*IntegrationTest") //ta bort integrationstester från unit tester
+        }
+}
+//skapar upp en ny task för gradle för att separera unit tests - integration tests
+task<Test>("integrationTest") {
+    description = "Runs integration tests."
+    group = "verification"
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+
+    include("*IntegrationTest")
+    shouldRunAfter("test")
 }
 tasks.jacocoTestReport {
 dependsOn(tasks.test) // tests are required to run before generating the report
