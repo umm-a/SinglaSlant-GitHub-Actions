@@ -34,6 +34,9 @@ jobs:
 
     steps: 
     - name: Build and push Docker image
+      with:
+        ref: Development
+        path: ./
       run: |
         docker build -t ghcr.io/umm-a/singlaslant-github-actions:Development -f Dockerfile .
         docker push ghcr.io/umm-a/singlaslant-github-actions:Development
