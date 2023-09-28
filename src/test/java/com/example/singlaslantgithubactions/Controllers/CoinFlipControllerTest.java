@@ -40,7 +40,7 @@ class CoinFlipControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("index"))
                 .andExpect(content().string(containsString("Coin Flip Game")));
     }
-
+*/
     @Test
     void flipCoinShouldReturnHeads() {
         String result = coinFlipController.flipCoin(0.6);
@@ -76,11 +76,11 @@ class CoinFlipControllerTest {
 
 
 
-  /*  @Test
+    @Test
     void calculateWinRateStartsAt0() {
         coinFlipController.coinFlip.setTurns(0);
         assertEquals(coinFlipController.calculateWinRate(), 0);
-    }*/
+    }
 
     @Test
     void whenUserHasWonAllWinRateIs100() {
