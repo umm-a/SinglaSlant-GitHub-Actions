@@ -34,10 +34,9 @@ jobs:
 
     steps: 
     - name: Build and push Docker image
-      working-directory: .
       run: |
-        docker build -t ghcr.io/umm-a/singlaslant-github-actions:development -f Dockerfile .
-        docker push ghcr.io/umm-a/singlaslant-github-actions:development
+        docker build -t ghcr.io/umm-a/singlaslant-github-actions:Development -f Dockerfile .
+        docker push ghcr.io/umm-a/singlaslant-github-actions:Development
 
   fake-deployment: 
     runs-on: ubuntu-latest
