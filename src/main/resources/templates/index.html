@@ -17,13 +17,14 @@
 </form>
 
 <h2>Round Results</h2>
-<td th:text="${WINNER}"></td>
+<!-- Display the WINNER -->
+<div th:text="${WINNER}"></div>
 <table>
     <tr>
-        <th>Round </th>
-        <th>User's Choice </th>
-        <th>Computer's Choice </th>
-        <th>Winner </th>
+        <th>Round</th>
+        <th>User's Choice</th>
+        <th>Computer's Choice</th>
+        <th>Winner</th>
     </tr>
     <tr th:each="round, roundStat : ${rounds}">
         <td th:text="${roundStat.index + 1}"></td>
@@ -35,7 +36,6 @@
         </td>
     </tr>
 </table>
-
 
 <h2>Scores</h2>
 <p>User Score: <span th:text="${userScore}"></span></p>

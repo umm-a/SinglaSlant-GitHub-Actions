@@ -79,11 +79,6 @@ public class CoinFlipController {
         return "index";
     }
 
-protected double calculateWinRate() {
-        if (coinFlip.getTurns() == 0) return 0.0;
-        return ((double) coinFlip.getUserScore() / coinFlip.getTurns()) * 100;
-    }
-
     protected RoundResult playGame(String choice) {
         String result = flipCoin(Math.random());
         String computerChoice = calculateComputerChoice(choice);
