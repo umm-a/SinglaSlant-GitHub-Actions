@@ -65,7 +65,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build image
         run: docker build -t ghcr.io/umm-a/singlaslant-github-actions:Development -f Dockerfile .
-
+      - name: Push image
+        run: docker push ghcr.io/umm-a/singlaslant-github-actions:Development
     #- name: Build and push Docker image
      # working-directory: SinglaSlant-GitHub-Actions
       #run: |
