@@ -3,6 +3,7 @@ package com.example.singlaslantgithubactions.Controllers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,20 +25,33 @@ class CoinFlipControllerTest {
     CoinFlipController coinFlipController;
     @Autowired
     private MockMvc mockMvc;
+
     @BeforeEach
-    void setUp(){
-         coinFlipController = new CoinFlipController();
+    void setUp() {
+        coinFlipController = new CoinFlipController();
+
     }
 
     @Test
-    public void testPageIsDisplayedCorrectly() throws Exception{
+    public void testPageIsDisplayedCorrectly() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
                 .andExpect(content().string(containsString("Coin Flip Game")));
     }
+
     @Test
-    void flipCoin() {
+    void flipCoinShouldReturnHeads() {
+        String result = coinFlipController.flipCoin(0.6);
+        assertEquals(result, "heads");
     }
+
+    @Test
+    void flipCoinShouldReturnTails() {
+        String result = coinFlipController.flipCoin(0.3);
+        assertEquals(result, "tails");
+    }
+
+
 /*
     @Test
     public void testPublishFlip() { //test som ska kunna se vad som returneras av endpointen
@@ -63,7 +77,7 @@ class CoinFlipControllerTest {
     @Test
     void calculateWinRateStartsAt0() {
         coinFlipController.coinFlip.setTurns(0);
-        assertEquals(coinFlipController.calculateWinRate(),0);
+        assertEquals(coinFlipController.calculateWinRate(), 0);
     }
 
     @Test
@@ -75,6 +89,7 @@ class CoinFlipControllerTest {
         //assertTrue(coinFlipController.calculateWinRate()<0);
         assertEquals(coinFlipController.calculateWinRate(), 100);
     }
+
     @Test
     void whenUserHasLostAllWinRateIsZero() {
         coinFlipController.coinFlip.setTurns(1);
@@ -112,16 +127,19 @@ class CoinFlipControllerTest {
         String winner = coinFlipController.calculateWinner("heads", "heads");
         assertEquals(winner, "User");
     }
+
     @Test
     void whenChoiceAndResultIsTailsUserWins() {
         String winner = coinFlipController.calculateWinner("tails", "tails");
         assertEquals(winner, "User");
     }
+
     @Test
     void whenChoiceEqualsHeadsAndResultEqualsTailsComputerWins() {
         String winner = coinFlipController.calculateWinner("heads", "tails");
         assertEquals(winner, "Computer");
     }
+
     @Test
     void whenChoiceEqualsTailsAndResultEqualsHeadsComputerWins() {
         String winner = coinFlipController.calculateWinner("tails", "heads");

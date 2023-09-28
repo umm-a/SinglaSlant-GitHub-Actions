@@ -51,7 +51,7 @@ public class CoinFlipController {
     }
 
     protected RoundResult playGame(String choice) {
-        String result = flipCoin();
+        String result = flipCoin(randomizer());
         String computerChoice = calculateComputerChoice(choice);
         String winner = calculateWinner(choice, result);
 
@@ -77,7 +77,11 @@ public class CoinFlipController {
         }
     }
 
-    private String flipCoin() {
-        return Math.random() > 0.5 ? "heads" : "tails";
+    protected String flipCoin(double randomNumber) {
+        return randomNumber > 0.5 ? "heads" : "tails";
+    }
+
+    private double randomizer (){
+        return Math.random();
     }
 }
