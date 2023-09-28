@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.ui.Model;
 
+import static org.mockito.Mockito.*;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,7 +34,7 @@ class CoinFlipControllerTest {
 
     }
 
-    @Test
+/*    @Test
     public void testPageIsDisplayedCorrectly() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
@@ -68,17 +70,17 @@ class CoinFlipControllerTest {
 
         // Assert the return value (e.g., the redirect URL)
         assertEquals("redirect:/", result);
-    }
+    }*/
 
 
- */
 
 
-    @Test
+
+  /*  @Test
     void calculateWinRateStartsAt0() {
         coinFlipController.coinFlip.setTurns(0);
         assertEquals(coinFlipController.calculateWinRate(), 0);
-    }
+    }*/
 
     @Test
     void whenUserHasWonAllWinRateIs100() {

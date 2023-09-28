@@ -80,5 +80,4 @@ public class CoinFlipController {
     protected String flipCoin(double randomNumber) {
         return randomNumber > 0.5 ? "heads" : "tails";
     }
-
 }
