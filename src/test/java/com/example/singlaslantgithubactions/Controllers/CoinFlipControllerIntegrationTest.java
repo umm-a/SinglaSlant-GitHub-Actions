@@ -34,7 +34,7 @@ public class CoinFlipControllerIntegrationTest {
     @Test
     void publishFlipReturnsViewIndex() throws Exception {
         this.mockMvc.perform(post("/flip?choice=" + "tails"))
-                .andExpect(view().name("indexHEJEHJ"));
+                .andExpect(view().name("index"));
     }
 
     @Test
