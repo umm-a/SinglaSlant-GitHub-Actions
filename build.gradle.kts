@@ -9,6 +9,8 @@ tasks.test {
 finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 
         filter {
+
+            //lägga till exclude för Controllern (src-koden) också här så de inte kommer med i rapporten
             excludeTestsMatching("*IntegrationTest") //ta bort integrationstester från unit tester
         }
 }

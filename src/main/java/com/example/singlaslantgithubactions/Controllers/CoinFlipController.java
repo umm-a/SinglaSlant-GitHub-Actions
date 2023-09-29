@@ -3,6 +3,7 @@ package com.example.singlaslantgithubactions.Controllers;
 import com.example.singlaslantgithubactions.Model.CoinFlip;
 import com.example.singlaslantgithubactions.Model.RoundResult;
 import com.example.singlaslantgithubactions.Services.Game;
+import com.example.singlaslantgithubactions.Services.RandomNumberGenerator;
 import com.example.singlaslantgithubactions.Services.WinRateCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,14 @@ public class CoinFlipController {
    // protected CoinFlip coinFlip = new CoinFlip();
     private final Game game;
     private final WinRateCalculator winRateCalculator;
+    private final RandomNumberGenerator randomNumberGenerator;
 
 
     @Autowired
-    public CoinFlipController(Game game, WinRateCalculator winRateCalculator) {
+    public CoinFlipController(Game game, WinRateCalculator winRateCalculator, RandomNumberGenerator randomNumberGenerator) {
         this.game = game;
         this.winRateCalculator = winRateCalculator;
+        this.randomNumberGenerator=randomNumberGenerator;
     }
 
     @GetMapping("/")
@@ -43,7 +46,7 @@ public class CoinFlipController {
 
     @PostMapping("/flip")
     public String publishFlip(@RequestParam String choice, Model model) {
-        double resultAsDouble = Math.random();
+        double resultAsDouble = randomNumberGenerator.generateRandomNumber();
         RoundResult roundResult = game.playGame(choice, resultAsDouble);
         double winRate = winRateCalculator.calculateWinRate(game.getCoinFlip());
         rounds.add(roundResult);
