@@ -22,9 +22,8 @@ task<Test>("integrationTest") {
         includeTestsMatching("*IntegrationTest")
     }
 }
-
 tasks.jacocoTestReport {
-dependsOn(tasks.test) // tests are required to run before generating the report
+dependsOn(tasks.test, tasks.named("integrationTest")) // tests are required to run before generating the report
 }
 jacoco {
 toolVersion = "0.8.9"
