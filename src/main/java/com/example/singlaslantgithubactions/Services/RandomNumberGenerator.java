@@ -1,7 +1,7 @@
 package com.example.singlaslantgithubactions.Services;
-
 import org.springframework.stereotype.Component;
 
+//Klass för att returnera ett slumpmässigt tal
 @Component
 public class RandomNumberGenerator {
 

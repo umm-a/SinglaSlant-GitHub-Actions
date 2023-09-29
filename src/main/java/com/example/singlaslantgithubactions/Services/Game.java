@@ -1,14 +1,17 @@
 package com.example.singlaslantgithubactions.Services;
-
 import com.example.singlaslantgithubactions.Model.CoinFlip;
 import com.example.singlaslantgithubactions.Model.RoundResult;
 import org.springframework.stereotype.Component;
 
+//Klass som kör spelet, har en CoinFlip-klass med användarens samt datorns score, samt hur många omgångar som körts
+// i Game-klassen sköts logik för att:
+// - välja heads/tails
+// - sätta datorns val av heads/tails beroende på användares(user's) input
+// - se vem som vann, user/computer
+// - uppdatera coinFlip's variabler till de aktuella värdena
 @Component
 public class Game {
     private final CoinFlip coinFlip;
-
-    //@Autowired
     public Game(CoinFlip coinFlip) {
         this.coinFlip = coinFlip;
     }
@@ -17,7 +20,6 @@ public class Game {
         String result = flipCoin(resultAsDouble);
         String computerChoice = calculateComputerChoice(choice);
         String winner = calculateWinner(choice, result);
-
         updateCoinFlip(winner);
 
         return new RoundResult(choice, computerChoice, winner);
@@ -33,7 +35,6 @@ public class Game {
 
     protected String calculateWinner(String choice, String result) {
         if (choice.equals(result)) {
-
             return "User";
         } else {
             return "Computer";

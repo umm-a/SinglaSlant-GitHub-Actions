@@ -1,8 +1,8 @@
 package com.example.singlaslantgithubactions.Services;
-
 import com.example.singlaslantgithubactions.Model.CoinFlip;
 import org.springframework.stereotype.Component;
 
+//Klass för att räkna ut användarens vinstfrekvens i procent
 @Component
 public class WinRateCalculator {
     public double calculateWinRate(CoinFlip coinFlip) {
