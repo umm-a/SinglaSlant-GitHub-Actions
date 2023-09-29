@@ -8,6 +8,7 @@ class SinglaSlantGitHubActionsApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
