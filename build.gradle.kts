@@ -12,6 +12,9 @@ tasks.test {
         //lägga till exclude för Controllern (src-koden) också här så de inte kommer med i rapporten
         excludeTestsMatching("*IntegrationTest") //ta bort integrationstester från unit tester
     }
+    testLogging {
+        events("passed")
+    }
 }
 //skapar upp en ny task för gradle för att separera unit tests - integration tests
 task<Test>("integrationTest") {
@@ -21,6 +24,9 @@ task<Test>("integrationTest") {
     classpath = sourceSets.test.get().runtimeClasspath
     filter {
         includeTestsMatching("*IntegrationTest")
+    }
+    testLogging {
+        events("passed")
     }
 }
 tasks.jacocoTestReport {
