@@ -1,5 +1,6 @@
 package com.example.singlaslantgithubactions.Controllers;
 
+import com.example.singlaslantgithubactions.JaCoCoUtil.Generated;
 import com.example.singlaslantgithubactions.Model.CoinFlip;
 import com.example.singlaslantgithubactions.Model.RoundResult;
 import com.example.singlaslantgithubactions.Services.Game;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Generated
 public class CoinFlipController {
 
     private List<RoundResult> rounds = new ArrayList<>();
