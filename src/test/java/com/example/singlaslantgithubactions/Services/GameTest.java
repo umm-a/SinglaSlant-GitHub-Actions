@@ -4,6 +4,7 @@ import com.example.singlaslantgithubactions.Model.RoundResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +13,9 @@ class GameTest {
     Game game;
     @InjectMocks
     private Game mockGame;
+    @Mock
+    private CoinFlip mockCoinFlip;
+
     CoinFlip coinFlip;
 
     @BeforeEach
@@ -20,6 +24,7 @@ class GameTest {
         game = new Game(coinFlip);
         MockitoAnnotations.openMocks(this);
     }
+
 
     @Test
     void userWinsWithHeads() {
