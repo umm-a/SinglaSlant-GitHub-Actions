@@ -17,7 +17,6 @@ class WinRateCalculatorTest {
 
     @Test
     void calculateWinRateStartsAt0() {
-        //coinFlip.setTurns(0);
         assertEquals(winRateCalculator.calculateWinRate(coinFlip), 0);
     }
 
@@ -25,7 +24,6 @@ class WinRateCalculatorTest {
     void whenUserHasWonAllWinRateIs100() {
         coinFlip.setTurns(1);
         coinFlip.setUserScore(1);
-
         assertEquals(winRateCalculator.calculateWinRate(coinFlip), 100);
     }
 
@@ -33,8 +31,6 @@ class WinRateCalculatorTest {
     void whenUserHasLostAllWinRateIsZero() {
         coinFlip.setTurns(1);
         coinFlip.setUserScore(0);
-
-
         assertEquals(winRateCalculator.calculateWinRate(coinFlip), 0);
     }
 
@@ -42,7 +38,6 @@ class WinRateCalculatorTest {
     void whenUserHasWonHalfWinRateIs50() {
         coinFlip.setTurns(2);
         coinFlip.setUserScore(1);
-
         assertEquals(winRateCalculator.calculateWinRate(coinFlip), 50);
     }
 }

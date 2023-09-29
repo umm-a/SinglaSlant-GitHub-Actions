@@ -4,61 +4,45 @@ import com.example.singlaslantgithubactions.Model.RoundResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class GameTest {
 
     Game game;
     @InjectMocks
     private Game mockGame;
-    @Mock
-    private CoinFlip mockCoinFlip;
-
     CoinFlip coinFlip;
 
     @BeforeEach
     void setup() {
         coinFlip = new CoinFlip();
         game = new Game(coinFlip);
-        // mockGame = mock(Game.class);
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
     void userWinsWithHeads() {
-
         RoundResult roundResult = mockGame.playGame("heads", 0.6);
         assertEquals(roundResult.getWinner(), "User");
     }
 
     @Test
     void userWinsWithTails() {
-
         RoundResult roundResult = game.playGame("tails", 0.3);
         assertEquals(roundResult.getWinner(), "User");
     }
 
     @Test
     void userLosesWithHeads() {
-
         RoundResult roundResult = game.playGame("heads", 0.3);
         assertEquals(roundResult.getWinner(), "Computer");
-
     }
 
     @Test
     void userLosesWithTails() {
-
         RoundResult roundResult = game.playGame("tails", 0.6);
         assertEquals(roundResult.getWinner(), "Computer");
-
     }
 
     @Test
@@ -112,7 +96,6 @@ class GameTest {
     @Test
     void whenUserWinsUserScoreIncreases() {
         int oldScore = coinFlip.getUserScore();
-        //int oldTurns = coinFlip.getTurns();
         game.updateCoinFlip("User");
         assertTrue(oldScore < coinFlip.getUserScore());
     }
@@ -120,7 +103,6 @@ class GameTest {
     @Test
     void whenComputerWinsComputerScoreIncreases() {
         int oldScore = coinFlip.getComputerScore();
-        //int oldTurns = coinFlip.getTurns();
         game.updateCoinFlip("Computer");
         assertTrue(oldScore < coinFlip.getComputerScore());
     }

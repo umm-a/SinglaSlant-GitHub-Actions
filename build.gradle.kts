@@ -6,10 +6,9 @@ plugins {
 }
 
 tasks.test {
-    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+    finalizedBy(tasks.jacocoTestReport) // rapport skapas efter att testerna körts
 
     filter {
-        //lägga till exclude för Controllern (src-koden) också här så de inte kommer med i rapporten
         excludeTestsMatching("*IntegrationTest") //ta bort integrationstester från unit tester
     }
     testLogging {
@@ -30,7 +29,7 @@ task<Test>("integrationTest") {
     }
 }
 tasks.jacocoTestReport {
-    dependsOn(tasks.test, tasks.named("integrationTest")) // tests are required to run before generating the report
+    dependsOn(tasks.test, tasks.named("integrationTest"))
 
 }
 jacoco {

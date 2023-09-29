@@ -13,7 +13,6 @@ class RandomNumberGeneratorTest {
 
     @Test
     void generateRandomNumberShouldReturnAtLeast0() {
-
         assertTrue(randomNumberGenerator.generateRandomNumber() >= 0);
     }
 
